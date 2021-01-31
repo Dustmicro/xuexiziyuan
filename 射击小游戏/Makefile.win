@@ -1,0 +1,31 @@
+# Project: 射击小游戏
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = main.o sheji.o
+LINKOBJ  = main.o sheji.o
+LIBS     = -static-libgcc -mwindows
+INCS     = 
+CXXINCS  = 
+BIN      = 射击小游戏.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+sheji.o: sheji.cpp
+	$(CPP) -c sheji.cpp -o sheji.o $(CXXFLAGS)
