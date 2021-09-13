@@ -1,0 +1,33 @@
+Thread t = new Thread();
+t.setPriority(10);
+// 看一下setPriority的时候 限制就行了 
+public final void setPriority(int newPriority) {
+    ThreadGroup g;
+    checkAccess();
+    // 主要看这句 如果大于MAX_PRIORITY  或者 小于MIN_PRIORITY 就抛异常 
+    // 那最大是MAX_PRIORITY 喽  最小是MIN_PRIORITY 喽 
+    if (newPriority > MAX_PRIORITY || newPriority < MIN_PRIORITY) {
+        throw new IllegalArgumentException();
+    }
+    if((g = getThreadGroup()) != null) {
+        if (newPriority > g.getMaxPriority()) {
+            newPriority = g.getMaxPriority();
+        }
+        setPriority0(priority = newPriority);
+    }
+} 
+// 揭晓答案 
+    /**
+     * 最小优先级
+     */
+    public final static int MIN_PRIORITY = 1;
+
+   /**
+     * 默认优先级
+     */
+    public final static int NORM_PRIORITY = 5;
+
+    /**
+      * 最大优先级
+      */
+    public final static int MAX_PRIORITY = 10;
